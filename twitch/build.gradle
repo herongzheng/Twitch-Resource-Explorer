@@ -26,8 +26,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'com.github.javafaker:javafaker:1.0.2'
 
-    // for spring cloud to support OpenFeign and OAuth2 (security)
-    implementation 'org.springframework.boot:spring-boot-starter-security' // also for user login/logout
+    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
     implementation 'org.springframework.security:spring-security-oauth2-client'
 
