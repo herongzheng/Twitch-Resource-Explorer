@@ -1,0 +1,46 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.0.7'
+    id 'io.spring.dependency-management' version '1.1.0'
+}
+
+group = 'com.laioffer'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '17'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:2022.0.1"
+    }
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'com.github.javafaker:javafaker:1.0.2'
+
+    // for spring cloud to support OpenFeign and OAuth2 (security)
+    implementation 'org.springframework.boot:spring-boot-starter-security' // also for user login/logout
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    implementation 'org.springframework.security:spring-security-oauth2-client'
+
+    // for database
+    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+
+    // caching
+    implementation 'com.github.ben-manes.caffeine:caffeine:3.+'
+    implementation 'org.springframework.boot:spring-boot-starter-cache'
+
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

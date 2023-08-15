@@ -1,0 +1,49 @@
+spring:
+  jackson:
+    default-property-inclusion: non_null
+
+  cloud:
+    openfeign:
+      oauth2:
+        enabled: true
+        clientRegistrationId:
+      client:
+        config:
+          twitch-api:
+            url: https://api.twitch.tv/helix
+            loggerLevel: basic
+            default-request-headers:
+              Client-Id:
+  security:
+    oauth2:
+      client:
+        registration:
+          twitch:
+            authorization-grant-type:
+            client-authentication-method:
+            client-id:
+            client-secret:
+        provider:
+          twitch:
+            token-uri:
+
+  datasource:
+    url: jdbc:mysql://${DATABASE_URL:localhost}:3306/twitch?createDatabaseIfNotExist=true
+    username: ${DATABASE_USERNAME:}
+    password: ${DATABASE_PASSWORD:}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  sql:
+    init:
+      mode: ${INIT_DB:always}
+      schema-locations: "classpath:database-init.sql"
+
+  cache:
+    caffeine:
+      spec: expireAfterWrite=5s
+
+logging:
+  level:
+    org.apache.coyote.http11.Http11InputBuffer: DEBUG # Incoming http requests
+    com.laioffer.twitch.external.TwitchApiClient: DEBUG
+    org.springframework.jdbc.core: DEBUG # SQL
